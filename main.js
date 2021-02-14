@@ -1,4 +1,9 @@
 const {app, BrowserWindow} = require('electron')
+
+// Set enviroment to dev
+process.env.NODE_ENV = 'development'
+const isDev = process.env.NODE_ENV != 'production' ? true : false
+
 let mainWindow
 
 function createMainWindow(){
