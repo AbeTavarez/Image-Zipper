@@ -29,4 +29,19 @@ function createMainWindow(){
 
 app.on('ready', createMainWindow)
 
+// If the computer is not a MacOS clicking on [x] will close the app
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
+})
+
+// On MacOS it re-creates a Main windows in the app
+// when the dick icon is click and there are no other windows open.
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createMainWindow()
+  }
+})
+
 app.contextIsolation = true
