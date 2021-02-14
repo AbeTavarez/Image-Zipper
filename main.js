@@ -1,11 +1,13 @@
 const {app, BrowserWindow} = require('electron')
+let mainWindow
 
 function createMainWindow(){
-    const mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         title: 'Image Zipper',
         width: 500,
         height:600
     })
+    mainWindow.loadURL(`file://${__dirname}/app/index.html`)
 }
 
 app.on('ready', createMainWindow)
