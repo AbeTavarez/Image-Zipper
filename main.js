@@ -3,6 +3,10 @@ const {app, BrowserWindow} = require('electron')
 // Set enviroment to dev
 process.env.NODE_ENV = 'development'
 const isDev = process.env.NODE_ENV != 'production' ? true : false
+// Set platform
+console.log(process.platform)
+const isWin = process.platform === 'win32' ? true : false
+
 
 let mainWindow
 
@@ -11,7 +15,8 @@ function createMainWindow(){
         title: 'Image Zipper',
         width: 500,
         height:600,
-        icon: `${__dirname}/assets/icons/Icon_256x256.png`
+        icon: `${__dirname}/assets/icons/Icon_256x256.png`,
+        resizable: isDev
     })
 
     // ***** LOAD URL/WEBSITE OR FILE
@@ -23,3 +28,5 @@ function createMainWindow(){
 }
 
 app.on('ready', createMainWindow)
+
+app.contextIsolation = true
