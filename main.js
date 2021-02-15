@@ -16,7 +16,8 @@ function createMainWindow(){
         width: 500,
         height:600,
         icon: `${__dirname}/assets/icons/Icon_256x256.png`,
-        resizable: isDev
+        resizable: isDev,
+        backgroundColor: 'white'
     })
 
     // ***** LOAD URL/WEBSITE OR FILE ************************
@@ -34,6 +35,7 @@ app.on('ready', () => {
     Menu.setApplicationMenu(mainMenu)
 
     globalShortcut.register('CmdOrCtrl+R', () => mainWindow.reload())
+    globalShortcut.register(isMac ? 'Command+Alt+I': 'Ctrl+Shift+I', () => mainWindow.toggleDevTools())
 
     mainWindow.on('close', () => mainWindow = null)
 })
