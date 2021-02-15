@@ -6,10 +6,11 @@ const isDev = process.env.NODE_ENV != 'production' ? true : false
 // Set platform
 console.log(process.platform)
 const isWin = process.platform === 'win32' ? true : false
+const isMac = process.platform === 'darwin' ? true : false
 
 
 let mainWindow
-
+// ============== MAIN WINDOW =====================================
 function createMainWindow(){
     mainWindow = new BrowserWindow({
         title: 'Image Zipper',
@@ -19,23 +20,42 @@ function createMainWindow(){
         resizable: isDev
     })
 
-    // ***** LOAD URL/WEBSITE OR FILE
+    // ***** LOAD URL/WEBSITE OR FILE ************************
     // mainWindow.loadURL(`http://www.abrahamtavarez.dev`)
     // mainWindow.loadURL(`file://${__dirname}/app/index.html`)
 
     // ***** YOU CAN ALSO LOAD FILE USING THIS LOAD FUNCTION
     mainWindow.loadFile(`./app/index.html`)
 }
-
+// ============= EVENTS =======================================
 app.on('ready', () => {
     createMainWindow()
 
+    const mainMenu = Menu.buildFromTemplate(menu)
+    Menu.setApplicationMenu(mainMenu)
+
     mainWindow.on('close', () => mainWindow = null)
 })
+// ============ MAIN MENU ==================
+const menu = [
+    {
+        label: 'File',
+        submenu: [
+            {
+                label: 'Quit',
+                click: () => app.quit()
+            }
+        ]
+    }
+]
+
+if (isMac) {
+    menu.unshift({role: 'appMenu'})
+}
 
 // If the computer is not a MacOS clicking on [x] will close the app
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+  if (!isMac) {
     app.quit()
   }
 })
