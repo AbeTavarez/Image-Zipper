@@ -9,7 +9,7 @@ const isWin = process.platform === 'win32' ? true : false
 const isMac = process.platform === 'darwin' ? true : false
 
 let mainWindow
-// ============== MAIN WINDOW =====================================
+// ============== MAIN WINDOW ================================
 function createMainWindow(){
     mainWindow = new BrowserWindow({
         title: 'Image Zipper',
@@ -35,7 +35,7 @@ app.on('ready', () => {
 
     mainWindow.on('close', () => mainWindow = null)
 })
-// ============ MAIN MENU ==================
+// ============ MAIN MENU =====================================
 const menu = [
     ...(isMac ? [{role: 'appMenu'}] : []),
     {
@@ -43,15 +43,13 @@ const menu = [
         submenu: [
             {
                 label: 'Quit',
+                // accelerator: isMac ? 'Command+W' : 'Ctrl+W',
+                accelerator: 'CmdOrCtrl+W',
                 click: () => app.quit()
             }
         ]
     }
 ]
-
-// if (isMac) {
-//     menu.unshift({role: 'appMenu'})
-// }
 
 // If the computer is not a MacOS clicking on [x] will close the app
 app.on('window-all-closed', () => {
