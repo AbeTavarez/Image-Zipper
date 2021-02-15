@@ -1,4 +1,4 @@
-# Immage Zipper
+# Image Zipper
 
 Edit images with this light desktop application.
 
