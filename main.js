@@ -8,7 +8,6 @@ console.log(process.platform)
 const isWin = process.platform === 'win32' ? true : false
 const isMac = process.platform === 'darwin' ? true : false
 
-
 let mainWindow
 // ============== MAIN WINDOW =====================================
 function createMainWindow(){
@@ -38,6 +37,7 @@ app.on('ready', () => {
 })
 // ============ MAIN MENU ==================
 const menu = [
+    ...(isMac ? [{role: 'appMenu'}] : []),
     {
         label: 'File',
         submenu: [
@@ -49,9 +49,9 @@ const menu = [
     }
 ]
 
-if (isMac) {
-    menu.unshift({role: 'appMenu'})
-}
+// if (isMac) {
+//     menu.unshift({role: 'appMenu'})
+// }
 
 // If the computer is not a MacOS clicking on [x] will close the app
 app.on('window-all-closed', () => {
