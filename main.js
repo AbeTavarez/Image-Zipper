@@ -1,4 +1,4 @@
-const {app, BrowserWindow, Menu} = require('electron')
+const {app, BrowserWindow, Menu, globalShortcut} = require('electron')
 
 // Set enviroment to dev
 process.env.NODE_ENV = 'development'
@@ -32,6 +32,8 @@ app.on('ready', () => {
 
     const mainMenu = Menu.buildFromTemplate(menu)
     Menu.setApplicationMenu(mainMenu)
+
+    globalShortcut.register('CmdOrCtrl+R', () => mainWindow.reload())
 
     mainWindow.on('close', () => mainWindow = null)
 })
