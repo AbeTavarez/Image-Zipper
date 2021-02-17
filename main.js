@@ -30,7 +30,7 @@ function createMainWindow(){
 }
 
 function createAboutWindow(){
-  abotWindow = new BrowserWindow({
+  aboutWindow = new BrowserWindow({
     title: 'About Image Zipper',
     width: 300,
     height: 300,
@@ -67,6 +67,17 @@ const menu = [
     {
        role: 'fileMenu'
     },
+    ...(!isMac ? [
+      {
+        label: 'Help',
+      submenu: [
+        {
+          label: 'About',
+          click: createAboutWindow,
+        }
+      ]
+      }
+    ] : []),
     ...(isDev ? [
         {
             label: 'Developer',
