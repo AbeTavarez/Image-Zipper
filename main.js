@@ -9,7 +9,8 @@ const isWin = process.platform === 'win32' ? true : false
 const isMac = process.platform === 'darwin' ? true : false
 
 let mainWindow
-// ============== MAIN WINDOW ================================
+let aboutWindow
+// ============== APP WINDOWS ================================
 function createMainWindow(){
     mainWindow = new BrowserWindow({
         title: 'Image Zipper',
@@ -26,6 +27,18 @@ function createMainWindow(){
 
     // ***** YOU CAN ALSO LOAD FILE USING THIS LOAD FUNCTION
     mainWindow.loadFile(`./app/index.html`)
+}
+
+function createAboutWindow(){
+  abotWindow = new BrowserWindow({
+    title: 'About Image Zipper',
+    width: 300,
+    height: 300,
+    icon: './assets/icons/Icon_256x256.png',
+    resizable: false,
+    backgroundColor: 'white'
+
+  })
 }
 // ============= EVENTS =======================================
 app.on('ready', () => {
