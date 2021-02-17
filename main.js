@@ -39,6 +39,7 @@ function createAboutWindow(){
     backgroundColor: 'white'
 
   })
+  aboutWindow.loadFile('./app/about.html')
 }
 // ============= EVENTS =======================================
 app.on('ready', () => {
@@ -47,14 +48,22 @@ app.on('ready', () => {
     const mainMenu = Menu.buildFromTemplate(menu)
     Menu.setApplicationMenu(mainMenu)
 
-    globalShortcut.register('CmdOrCtrl+R', () => mainWindow.reload())
-    globalShortcut.register(isMac ? 'Command+Alt+I': 'Ctrl+Shift+I', () => mainWindow.toggleDevTools())
+    // globalShortcut.register('CmdOrCtrl+R', () => mainWindow.reload())
+    // globalShortcut.register(isMac ? 'Command+Alt+I': 'Ctrl+Shift+I', () => mainWindow.toggleDevTools())
 
     mainWindow.on('close', () => mainWindow = null)
 })
 // ============ MAIN MENU =====================================
 const menu = [
-    ...(isMac ? [{role: 'appMenu'}] : []),
+    ...(isMac ? [{
+      label: app.name,
+      submenu: [
+        {
+          label: 'About',
+          click: createAboutWindow
+        }
+      ]
+    }] : []),
     {
        role: 'fileMenu'
     },
