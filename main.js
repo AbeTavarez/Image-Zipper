@@ -36,8 +36,10 @@ function createAboutWindow(){
     height: 300,
     icon: './assets/icons/Icon_256x256.png',
     resizable: false,
-    backgroundColor: 'white'
-
+    backgroundColor: 'white',
+    webPreferences: {
+      nodeIntegration: true
+    }
   })
   aboutWindow.loadFile('./app/about.html')
 }
