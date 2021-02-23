@@ -14,7 +14,7 @@ let aboutWindow
 function createMainWindow(){
     mainWindow = new BrowserWindow({
         title: 'Image Zipper',
-        width: 500,
+        width: isDev ? 700 : 500,
         height:600,
         icon: `${__dirname}/assets/icons/Icon_256x256.png`,
         resizable: isDev,
@@ -41,6 +41,12 @@ function createAboutWindow(){
       nodeIntegration: true
     }
   })
+
+  //Opens devtools if in development mode
+  if (isDev) {
+    mainWindow.webContents.openDevTools()
+  }
+
   aboutWindow.loadFile('./app/about.html')
 }
 // ============= EVENTS =======================================
